@@ -1,3 +1,4 @@
+
 # 💬 Local LLM RAG Chatbot
 
 A **Retrieval-Augmented Generation (RAG)** chatbot powered by **Ollama**, **ChromaDB**, and **FastAPI** — with an optional **Streamlit UI** for interactive chat.  
@@ -28,118 +29,152 @@ The system can run entirely **offline** using local LLMs (like `llama3`) or conn
 
 ## 🧠 Architecture Overview
 
+```text
 +-----------------------+
-| Text Documents (.txt)|
+|  Text Documents (.txt)|
 +----------+------------+
-|
-v
-[ ingest.py ]
-|
-v
-+-----------------+
-| ChromaDB Store |
-+-----------------+
-|
-v
-[ retriever.py ]
-|
-v
-[ app.py (FastAPI) ]
-|
-v
-[ ui_streamlit.py ]
-
+           |
+           v
+     [ ingest.py ]
+           |
+           v
+  +-----------------+
+  |   ChromaDB Store |
+  +-----------------+
+           |
+           v
+     [ retriever.py ]
+           |
+           v
+     [ app.py (FastAPI) ]
+           |
+           v
+     [ ui_streamlit.py ]
+````
 
 ---
 
 ## 🧩 Components
 
-| File | Description |
-|------|-------------|
-| **`ingest.py`** | Reads text files → generates embeddings (OpenAI or Ollama) → stores in ChromaDB |
-| **`retriever.py`** | Retrieves top relevant documents for a given question |
-| **`app.py`** | FastAPI backend for Q&A requests |
-| **`ui_streamlit.py`** | Browser-based chat interface |
-| **`start_chat.bat` / `start_chat.ps1`** | One-click launchers for Windows |
-| **`requirements.txt`** | Full list of dependencies |
+| File                                    | Description                                                                     |
+| --------------------------------------- | ------------------------------------------------------------------------------- |
+| **`ingest.py`**                         | Reads text files → generates embeddings (OpenAI or Ollama) → stores in ChromaDB |
+| **`retriever.py`**                      | Retrieves top relevant documents for a given question                           |
+| **`app.py`**                            | FastAPI backend for Q&A requests                                                |
+| **`ui_streamlit.py`**                   | Browser-based chat interface                                                    |
+| **`start_chat.bat` / `start_chat.ps1`** | One-click launchers for Windows                                                 |
+| **`requirements.txt`**                  | Full list of dependencies                                                       |
 
 ---
 
 ## ⚙️ Installation
 
-### 1. Clone the repository
+### 1️⃣ Clone the repository
+
 ```bash
 git clone https://github.com/oleglihvoinen/llm-rag-example.git
 cd llm-rag-example
+```
 
-2. Create a virtual environment
+### 2️⃣ Create a virtual environment
 
+```bash
 python -m venv .venv
 .\.venv\Scripts\activate
+```
 
+### 3️⃣ Install dependencies
 
-3. Install dependencies
-
+```bash
 pip install -r requirements.txt
+```
 
+### 4️⃣ (Optional) Add your OpenAI API key
 
-4. (Optional) Add your OpenAI API key
+Create a `.env` file:
 
-Create a .env file:
-
+```bash
 OPENAI_API_KEY=your_key_here
+```
 
+---
 
-🤖 Ollama Setup
+## 🤖 Ollama Setup
 
-Download Ollama
-Pull your preferred local model (e.g., Llama 3)
-ollama pull llama3
+1. [Download Ollama](https://ollama.com/download)
+2. Pull your preferred local model (e.g., Llama 3):
 
+   ```bash
+   ollama pull llama3
+   ```
+3. Start the Ollama server:
 
-Start the Ollama server:
-ollama serve
+   ```bash
+   ollama serve
+   ```
 
-🧱 Prepare Your Data
+---
 
-Place your .txt documents inside the data/ folder, then run:
+## 🧱 Prepare Your Data
 
+Place your `.txt` documents inside the `data/` folder, then run:
+
+```bash
 python ingest.py
+```
 
+✅ This creates a local ChromaDB database (`/chroma_db`) with your text embeddings.
 
-💬 Run the Chatbot
-Option 1 – One-click (Windows)
+---
+
+## 💬 Run the Chatbot
+
+### 🪄 Option 1 – One-click (Windows)
 
 Double-click:
 
+```
 start_chat.bat
+```
 
-Then open http://localhost:8501
+Then open [http://localhost:8501](http://localhost:8501) in your browser.
 
-🧠 Example Query
+### 🧩 Option 2 – Manual startup
 
-Question:
+```bash
+ollama serve
+uvicorn app:app --reload
+streamlit run ui_streamlit.py
+```
 
-What is this project about?
+---
 
-Answer:
+## 🧠 Example Query
 
-This project demonstrates a retrieval-augmented chatbot that uses local embeddings and large language models to answer questions based on custom documents.
+**Question:**
 
-🛠 Requirements
+> What is this project about?
 
-Python 3.10+
+**Answer:**
 
-Ollama 0.12+
+> This project demonstrates a retrieval-augmented chatbot that uses local embeddings and large language models to answer questions based on custom documents.
 
-ChromaDB 0.5+
+---
 
-(Optional) OpenAI API Key
+## 🛠 Requirements
 
-📦 Requirements File
+* Python **3.10+**
+* Ollama **0.12+**
+* ChromaDB **0.5+**
+* (Optional) OpenAI API Key
 
-See requirements.txt
+---
 
+## 📦 Requirements File
+
+See [`requirements.txt`](./requirements.txt):
+
+```text
 fastapi
 uvicorn
 chromadb
@@ -149,10 +184,13 @@ python-dotenv
 streamlit
 pydantic
 tiktoken
+```
 
+---
 
-🌐 Project Structure
+## 🌐 Project Structure
 
+```text
 llm-rag-example/
 │
 ├── app.py
@@ -165,18 +203,55 @@ llm-rag-example/
 ├── data/
 │   └── example.txt
 └── chroma_db/
+```
 
-📘 License
+---
 
-This project is released under the MIT License — free for personal and educational use.
+## 📘 License
 
-🧩 Credits
+This project is released under the **MIT License** — free for personal and educational use.
 
-Created by Oleg Lihvoinen
+---
+
+## 🧩 Credits
+
+Created by **Oleg Lihvoinen**
 Built with ❤️ using:
 
-FastAPI
-Streamlit
-Ollama
-ChromaDB
-OpenAI
+* [FastAPI](https://fastapi.tiangolo.com)
+* [Streamlit](https://streamlit.io)
+* [Ollama](https://ollama.com)
+* [ChromaDB](https://www.trychroma.com)
+* [OpenAI](https://platform.openai.com)
+
+---
+
+## 🖼️ Optional Screenshot
+
+![Architecture Diagram](assets/img/llm-rag-architecture.png)
+
+---
+
+> 💡 **Tip:** This setup allows you to run an entirely offline local AI assistant.
+> You can expand it to include PDFs, SQL data, or internal documents — simply adapt `ingest.py` to your preferred data source.
+
+```
+
+---
+
+✅ **Usage**
+
+1. Save the content above as:
+```
+
+C:\llm-rag\llm-rag-example\README.md
+
+````
+2. Add and push:
+```bash
+git add README.md
+git commit -m "Add formatted README.md for LLM RAG Chatbot"
+git push
+````
+
+---
