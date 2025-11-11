@@ -226,7 +226,7 @@ Built with ❤️ using:
 
 ---
 
-## 🖼️ Optional Screenshot
+## 🖼️ Screenshot
 
 ![Architecture Diagram](/assets/images/llm2.png)
 
