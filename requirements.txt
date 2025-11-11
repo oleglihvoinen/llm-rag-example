@@ -1,14 +1,18 @@
+# === Core environment ===
+python-dotenv>=1.0.1
+requests>=2.31.0
 
----
+# === LLM backends ===
+openai>=1.33.0        # OpenAI client (used for cloud embeddings/chat)
+chromadb>=0.5.3        # Vector DB for document storage and retrieval
 
-## 3. `requirements.txt`
+# === API and backend server ===
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
 
-```text
-fastapi
-uvicorn
-python-dotenv
-openai>=1.0.0
-chromadb
-tiktoken
-streamlit
-pydantic
+# === Front-end (optional chat UI) ===
+streamlit>=1.35.0
+
+# === Utility libraries ===
+pydantic>=2.7.0
+tiktoken>=0.7.0

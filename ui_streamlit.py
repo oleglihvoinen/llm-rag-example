@@ -2,23 +2,41 @@
 import streamlit as st
 import requests
 
-st.set_page_config(page_title="LLM RAG Demo", page_icon="🧠")
+API_URL = "http://127.0.0.1:8000/ask"
 
-st.title("🧠 LLM RAG Demo")
-st.write("Ask a question about your local documents.")
+st.set_page_config(page_title="?? Local LLM Chat", page_icon="??", layout="centered")
 
-user_query = st.text_input("Your question")
+st.title("?? Local LLM Chatbot")
+st.caption("Powered by your RAG system (ChromaDB + FastAPI + Ollama/OpenAI)")
 
-if st.button("Ask") and user_query:
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display past messages
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
+
+# Input box
+user_input = st.chat_input("Ask something about your documents...")
+
+if user_input:
+    # Show user message
+    st.chat_message("user").markdown(user_input)
+    st.session_state.messages.append({"role": "user", "content": user_input})
+
+    # Send request to FastAPI backend
     try:
-        resp = requests.post("http://localhost:8000/chat", json={"query": user_query})
-        data = resp.json()
-        st.subheader("Answer")
-        st.write(data["answer"])
-
-        with st.expander("Context used"):
-            for i, c in enumerate(data["context"], 1):
-                st.markdown(f"**Doc {i}:**")
-                st.write(c)
+        res = requests.post(API_URL, json={"question": user_input}, timeout=180)
+        if res.status_code == 200:
+            data = res.json()
+            answer = data.get("answer", "?? No answer returned.")
+        else:
+            answer = f"? API Error: {res.status_code}"
     except Exception as e:
-        st.error(f"Error calling API: {e}")
+        answer = f"? Connection Error: {e}"
+
+    # Display assistant reply
+    st.chat_message("assistant").markdown(answer)
+    st.session_state.messages.append({"role": "assistant", "content": answer})
