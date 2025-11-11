@@ -6,7 +6,7 @@ API_URL = "http://127.0.0.1:8000/ask"
 
 st.set_page_config(page_title="?? Local LLM Chat", page_icon="??", layout="centered")
 
-st.title("?? Local LLM Chatbot")
+st.title("Local LLM Chatbot")
 st.caption("Powered by your RAG system (ChromaDB + FastAPI + Ollama/OpenAI)")
 
 # Initialize chat history
