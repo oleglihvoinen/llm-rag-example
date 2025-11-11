@@ -1,0 +1,100 @@
+# ==========================================
+# 🔒 Git Ignore File for LLM RAG Chat Project
+# ==========================================
+
+# --- Environment & secrets ---
+.env
+.env.*
+*.key
+*.pem
+
+# --- Python cache & build files ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.log
+*.tmp
+*.bak
+*.swp
+*.sqlite3
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+*.venv/
+
+# --- Chroma / embeddings data ---
+chroma_db/
+chroma/
+*.duckdb
+*.parquet
+
+# --- Local data files ---
+data/*.csv
+data/*.xlsx
+data/*.xml
+data/*.json
+data/*.zip
+data/*.gz
+data/*.tar
+data/*.txt
+
+# Keep sample/example files only
+!data/example.txt
+
+# --- Streamlit cache ---
+.streamlit/
+.streamlit_cache/
+.cache/
+__cache__/
+
+# --- VSCode / JetBrains IDE ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- Windows / macOS system files ---
+Thumbs.db
+ehthumbs.db
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+*.lnk
+desktop.ini
+
+# --- Logs & temporary files ---
+logs/
+*.log
+nohup.out
+
+# --- Build / distribution artifacts ---
+dist/
+build/
+*.egg-info/
+*.spec
+
+# --- Notebooks & checkpoints ---
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# --- Reports / output PDFs ---
+output/
+reports/
+*.pdf
+
+# --- Node / frontend cache (if used) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Temporary test files ---
+test_output/
+tmp/
+temp/
