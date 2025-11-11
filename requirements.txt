@@ -1,0 +1,14 @@
+
+---
+
+## 3. `requirements.txt`
+
+```text
+fastapi
+uvicorn
+python-dotenv
+openai>=1.0.0
+chromadb
+tiktoken
+streamlit
+pydantic
