@@ -228,7 +228,7 @@ Built with ❤️ using:
 
 ## 🖼️ Optional Screenshot
 
-![Architecture Diagram](assets/img/llm-rag-architecture.png)
+![Architecture Diagram](/assets/images/llm2.png)
 
 ---
 
@@ -239,19 +239,3 @@ Built with ❤️ using:
 
 ---
 
-✅ **Usage**
-
-1. Save the content above as:
-```
-
-C:\llm-rag\llm-rag-example\README.md
-
-````
-2. Add and push:
-```bash
-git add README.md
-git commit -m "Add formatted README.md for LLM RAG Chatbot"
-git push
-````
-
----
